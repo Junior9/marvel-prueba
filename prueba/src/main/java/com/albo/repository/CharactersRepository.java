@@ -19,4 +19,7 @@ public interface CharactersRepository extends CrudRepository<CharactersModel, Lo
 	
 	@Query(value = "SELECT c.name, co.TITLE as comic_Title, co.MARVEL_ID from characters c INNER JOIN characters_comics cc ON c.marvel_Id = cc.marvel_characters_id  INNER JOIN comics co ON co.MARVEL_ID  = cc.MARVEL_COMICS_ID  WHERE  c.name = ?1 GROUP BY c.name, co.TITLE,co.MARVEL_ID", nativeQuery = true)
 	public List<String> getComicsByCharactersName(String name);
+	
+	@Query(value = "SELECT c.name, cc.MARVEL_CHARACTERS_ID  from characters c INNER JOIN characters_comics cc ON c.marvel_Id = cc.marvel_characters_id  WHERE  cc.MARVEL_COMICS_ID = ?1 GROUP BY c.name", nativeQuery = true)
+	public List<String> getCharactersBYComicsID(String id);
 }

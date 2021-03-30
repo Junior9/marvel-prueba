@@ -231,10 +231,7 @@
                 <h5>Ultima actualización</h5>
                 <p>{{pageResponseCharacters.json.last_sync}}</p>
 
-                <div class="card-chara" *ngFor="let hero of pageResponseCharacters.json.items">
-                    <h5>{{hero.character}}</h5>
-                    <p>{{hero.comics}}</p>
-                </div>
+                <p>{{pageResponseCharacters.json.items}}</p>
 
             </div>
             <div class="modal-footer">

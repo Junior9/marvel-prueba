@@ -39,10 +39,7 @@ export class InicioComponent implements OnInit {
     title:"",
     json:{
       last_sync:'',
-      items:[{
-        character:'',
-        comics:[String]
-      }]
+      items:{},
     }
   }
   pageErrorMsn={
@@ -73,9 +70,10 @@ export class InicioComponent implements OnInit {
   
   getColaboarators(){
     this.resetErrorMsn();
-    $("#modal").modal("show");
+    
     if(this.sincronizaciones.length > 0){
       if(this.nombreCharacToFilterColabo != ''){
+        $("#modal").modal("show");
         this.marvelService.getColaboaratorsByCharacterName(this.nombreCharacToFilterColabo).subscribe(resp=>{
           this.pageResponse.title = "Editores, escritores y coloristas que han estado involucrados con " +this.nombreCharacToFilterColabo;
           this.pageResponse.json.Character = resp['Character'];
@@ -105,21 +103,26 @@ export class InicioComponent implements OnInit {
   
   getCharacteresInteraction(){
     this.resetErrorMsn();
-    $("#modal").modal("show");
+  
     if(this.sincronizaciones.length > 0){
       if(this.nombreCharacToFilter != ''){
+        $("#modal").modal("show");
         this.marvelService.getCharacteresInteractionByCharacterName(this.nombreCharacToFilter).subscribe(resp=>{
-          console.log(resp)
+          
+          let list = resp['result'];
+          let lastSyc = resp['last_sync'];
 
           this.pageResponseCharacters.title = "Characteres que interacturon con el "+ this.nombreCharacToFilter;
-          this.pageResponseCharacters.json.last_sync = "";
-          this.pageResponseCharacters.json.items = [];
+          this.pageResponseCharacters.json.last_sync = lastSyc;
+          this.pageResponseCharacters.json.items = list;
+
+          console.log(this.pageResponseCharacters)
 
           $("#modal").modal("hide");
           $("#modalResponse2").modal("show")
         },error=>{
           console.error(error)
-          this.msnError = error.message;
+          this.pageErrorMsn.requestErrorMsn = error.message;
           $("#modal").modal("hide");
           $("#modalError").modal("show")
         })

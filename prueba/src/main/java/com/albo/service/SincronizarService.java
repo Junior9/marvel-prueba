@@ -82,6 +82,8 @@ public class SincronizarService {
 		this.charactersRepository.save(new CharactersModel("Heroe 1","htttps://",147852));
 		this.charactersRepository.save( new CharactersModel("Heroe 2","htttps://",147853));
 		this.charactersRepository.save(new CharactersModel("Heroe 3","htttps://",147854));
+		this.charactersRepository.save(new CharactersModel("Heroe 4","htttps://",14789));
+		
 		
 		this.comicsRepository.save(new ComicsModel("Comic teste 1","desc teste",741852));
 		this.comicsRepository.save(new ComicsModel("Comic teste 2","desc teste",741851));
@@ -100,6 +102,12 @@ public class SincronizarService {
 		this.charaComicRepository.save(new Character_Comics(147854,741853));
 		this.charaComicRepository.save(new Character_Comics(147854,741857));
 		
+		this.charaComicRepository.save(new Character_Comics(14789,741852));
+		this.charaComicRepository.save(new Character_Comics(14789,741851));
+		this.charaComicRepository.save(new Character_Comics(14789,741853));
+		this.charaComicRepository.save(new Character_Comics(14789,741857));
+		
+		
 		this.creatorsComicRepository.save(new CreatorsComics(963852,741852,"editor"));
 		this.creatorsComicRepository.save(new CreatorsComics(963852,741851,"letterer"));
 		this.creatorsComicRepository.save(new CreatorsComics(963853,741853,"editor"));		
@@ -109,7 +117,7 @@ public class SincronizarService {
 		this.creatorsComicRepository.save(new CreatorsComics(963855,741852,"colorist"));
 	}
 
-	@Scheduled(cron="1 0 * * * *")
+	@Scheduled(cron="0 1 2 * * *")
 	public void sincro() throws InterruptedException{
 		
 	}
