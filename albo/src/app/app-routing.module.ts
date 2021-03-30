@@ -4,9 +4,7 @@ import { HeroeComponent } from './pages/heroe/heroe.component';
 import { InicioComponent } from './pages/inicio/inicio.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { SincronizacionComponent } from './pages/sincronizacion/sincronizacion.component';
-import { ComicComponent } from './pages/comic/comic.component';
-import { CreatorComponent } from './pages/creator/creator.component';
-
+import { ComicComponent } from './pages/comic/comic.component'
 
 const routes: Routes = [
   {path:'',component:InicioComponent},

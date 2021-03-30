@@ -12,7 +12,7 @@ import { SincronizacionComponent } from './pages/sincronizacion/sincronizacion.c
 import { FormsModule ,ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule} from '@angular/common/http';
 import { ComicComponent } from './pages/comic/comic.component';
-import { CreatorComponent } from './pages/creator/creator.component';
+
 
 @NgModule({
   declarations: [
@@ -23,8 +23,7 @@ import { CreatorComponent } from './pages/creator/creator.component';
     HeroeComponent,
     PageNotFoundComponent,
     SincronizacionComponent,
-    ComicComponent,
-    CreatorComponent
+    ComicComponent
   ],
   imports: [
     BrowserModule,
