@@ -16,3 +16,9 @@ echo "Instalación de las dependencias back-end..."
 echo "Aguarde..."
 mvn clean install
 
+echo "Inicializado servidor..."
+cd 'prueba'
+cd 'target'
+echo "Starting servidor..."
+echo "Aguarde..."
+java -jar prueba-0.0.1-SNAPSHOT.jar
