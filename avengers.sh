@@ -8,4 +8,4 @@ echo "........."
 cd 'albo'
 echo "Inicializado front-end..."
 echo "Aguarde..."
-ng serve -o
+ng serve -o   
