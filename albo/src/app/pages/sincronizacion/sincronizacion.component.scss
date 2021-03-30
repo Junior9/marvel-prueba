@@ -1,0 +1,31 @@
+.main{
+    background-color: whitesmoke;
+    min-height: 100vh;
+    height: 100%;
+    padding-bottom: 50px;
+    .info{
+        margin: 2% 5% 2% 5%;
+        text-align: center;
+        background-color: white;
+        padding: 2%;
+
+        .alert{
+            color: red;
+        }
+
+    }
+
+    .img{
+        width: 100%;
+        text-align: center;
+        padding: 5%;
+        img{
+            width: 50%;
+        }
+    }
+
+    .pleca{
+        text-align: center;
+        width: 100%;
+    }
+}

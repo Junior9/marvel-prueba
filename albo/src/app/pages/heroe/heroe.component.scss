@@ -1,0 +1,100 @@
+@import "./../../responsible.scss";
+
+.main{
+    min-height: 80vh;
+    height: 100%;
+    
+    .breadcrumb{
+        margin: 15px 25px 15px 25px;
+    }
+    .content{
+        display: flex;
+        flex-direction: column;
+        
+        .info{
+            width: 100%;
+            display: flex;
+            padding: 2%;
+            margin-bottom: 25px;
+            .img{
+                width: 50%;
+                text-align: center;
+                img{
+                    width: 70% ;
+                }
+            }
+            .detalles-inf{
+                width: 50%;
+            }
+        }
+        
+        .detalles{
+            padding: 2% 5% 2% 5%;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            
+            .card:hover{
+                transform: scale(1.05);
+            }
+            
+            .card-marvel{
+                width: 100%;
+                padding: 1%;
+                text-align: center;
+                display: flex;
+                margin-bottom: 2%;
+                
+                @include table{
+                    flex-direction: column;
+                }
+                
+                @include mobileGeneral{
+                    flex-direction: column;
+                }
+                
+                .card-img{
+                    width: 15%;
+                    text-align: center;
+                    
+                    @include table{
+                        display: none;
+                    }
+                    
+                    @include mobileGeneral{
+                        display: none;
+                    }
+                    
+                }
+                
+                .card-body-marvel{
+                    width: 85%;
+                    padding: 1%;
+
+                    @include table{
+                        width: 100%;
+                    }
+                    
+                    @include mobileGeneral{
+                        width: 100%;
+                    }
+                    
+                    .card-text{
+                        //height: 40vh;
+                    }
+                    
+                    .btn:hover{
+                        background-color: red;
+                        color: white;
+                    }
+                    .btn{
+                        border: red solid 1px;
+                    }
+                }
+                
+            }
+            
+            
+        }
+    }
+}

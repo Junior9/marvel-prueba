@@ -1,0 +1,62 @@
+$mobile: 325px;
+$mobile-mediun: 380px;
+$mobile-large:425px;
+$table: 770px;
+$laptop: 1024px;
+$laptop-large:1440px;
+$fourk:2560px;
+
+@mixin mobile{
+	@media  ( max-width: #{$mobile}){
+		@content;
+	}
+}
+
+@mixin mobileMediun{
+	@media (min-width:#{($mobile)} ) and ( max-width: #{$mobile-mediun}){
+		@content;
+	}
+}
+
+@mixin mobileLarge{
+	@media (min-width:#{($mobile-mediun)} ) and ( max-width: #{$mobile-large}){
+		@content;
+	}
+}
+
+@mixin mobileGeneral{
+	@media ( max-width: #{$mobile-large}){
+		@content;
+	}
+}
+
+@mixin table{
+	@media (min-width: #{$mobile-large+1px}) and (max-width: #{$table}){
+		@content;
+	}
+}
+
+@mixin laptop{
+	@media (min-width: #{$table+1px}) and (max-width: #{$laptop}){
+		@content;
+	}
+}
+
+@mixin laptopLarge{
+	@media (min-width: #{$laptop+1px}) and (max-width: #{$laptop-large}){
+		@content;
+	}
+}
+
+
+@mixin laptopGeneral{
+	@media (min-width: #{$mobile-large+1px}) and (max-width: #{$laptop-large}){
+		@content;
+	}
+}
+
+@mixin fourK{
+	@media(min-width: #{$laptop-large+1px}){
+		@content;
+	}
+}

@@ -1,0 +1,244 @@
+<app-header></app-header>
+<div class="main">
+    
+    <div class="portada">
+        <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="d-block w-100" src="assets/img/1.png" alt="First slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="assets/img/2.png" alt="Second slide">
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div class="content_page">
+        
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">Inicio</li>
+            </ol>
+        </nav>
+        
+        <div class="options">
+            <div class="option">
+                <p>Obentendrás los editores, escritores y coloristas que han estado involucrados en los cómics del personaje.</p>
+                
+                <div class="form-group">
+                    <label for="NombreHeroeOp1">Nombre del heroe</label>
+                    <select [(ngModel)]="nombreCharacToFilterColabo" class="form-control">
+                        <option value=""></option>
+                        <option *ngFor="let heroe of characters">{{heroe.name}}</option>
+                    </select>
+                </div>
+                <p class="error" *ngIf="pageErrorMsn.nombreCharacterColaborator !== ''">{{pageErrorMsn.nombreCharacterColaborator}}</p>
+                
+                <a (click)="getColaboarators()" class="btn btn-primary btn-block">Buscar</a>
+            </div>
+            
+            <div class="option">
+                <p>Obentendrás los otros héroes con los cuales nuestro personaje ha interactuado en cada uno de los cómics.</p>
+                <div class="form-group">
+                    <label for="NombreHeroeOp2">Nombre del heroe</label>
+                    <div class="form-group">
+                        <select [(ngModel)]="nombreCharacToFilter" class="form-control" >
+                            <option value=""></option>
+                            <option *ngFor="let heroe of characters">{{heroe.name}}</option>
+                        </select>
+                    </div>
+                    <p class="error" *ngIf="pageErrorMsn.nombreCharacterInteractor !== ''">{{pageErrorMsn.nombreCharacterInteractor}}</p>
+                </div>
+                <a (click)="getCharacteresInteraction()" class="btn btn-primary btn-block">Buscar</a>
+            </div>
+            
+            
+        </div>
+        
+        
+        <div class="datos_prueba">
+            <h5 > <a class="blinking" [routerLink]="['registradatos']">Registra datos de prueba</a> </h5>
+        </div>
+        
+        <div class="sincronizacion">
+            <h5>Historico de sincronización de la base de datos</h5>
+            <div class="timer" *ngIf="hasTimer"> 
+                <h3>Proxima actualización</h3>
+                <h2 class="circle" id="demo"></h2>
+            </div>
+            
+            <table class="table" *ngIf="sincronizaciones.length > 0; else elseSinc">
+                <thead>
+                    <tr>
+                        <th scope="col">Fecha de la ultima actualización</th>
+                        <th scope="col">Cantidad de registro actualizado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let sincronizacion of sincronizaciones">
+                        <td>{{sincronizacion.date}}</td>
+                        <td>{{sincronizacion.cantidad}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <ng-template #elseSinc>
+                <h4>Haz tu primer sincronización de la base de datos</h4>
+            </ng-template>
+            
+            
+            <button *ngIf="btnSinc" (click)="cancelar()" class="btn btn-primary btn-block">Cancelar sincronizar automatica</button>
+            <button [disabled]="btnSinc" (click)="sincronizar()" class="btn btn-sync btn-block">Sincronizar</button>
+            <button [disabled]="btnSinc" (click)="agendar()" class="btn btn-primary btn-block">Activar sincronizacion automatica</button>
+        </div>
+        
+        <div class="pleca">
+            <h5>Heroes de Marvel</h5>
+        </div>
+        <div class="heroes">
+            <div class="heroe" *ngFor="let heroe of heroes">
+                <div class="img">
+                    <img src="{{heroe.thumbnail.path}}.{{heroe.thumbnail.extension}}" alt="">
+                </div>
+                <div class="info">
+                    <p>{{heroe.name}}</p>
+                    <p><a [routerLink]="['heroe',heroe.id]" class="btn btn-primary">Más información</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+</div>
+<app-footer></app-footer>
+
+
+
+
+<!-- Modal -->
+<div class="modal" id="modal">
+    <div class="spinner">
+        <div class="cube1"></div>
+        <div class="cube2"></div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalError" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" >Error en la busca</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Mensaje: {{pageErrorMsn.requestErrorMsn}}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalSincroniza" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" >Sincroniza la base de datos</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Mensaje: {{pageErrorMsn.requestErrorMsn}}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button  (click)="sincronizar(true)" type="button" class="btn btn-primary">Sincronizar Ahora</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalSincronizaError" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" >Servidor fuera de servicio</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Mensaje: {{pageErrorMsn.requestErrorMsn}}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalResponse" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{pageResponse.title}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h5>Character</h5>
+                <p>{{pageResponse.json.Character}}</p>
+                <h5>Ultima actualización</h5>
+                <p>{{pageResponse.json.last_sync}}</p>
+                <h5>Editor</h5>
+                <p>{{pageResponse.json.editor}}</p>
+                <h5>Colorists</h5>
+                <p>{{pageResponse.json.colorists}}</p>
+                
+                <h5>Writers</h5>
+                <p>{{pageResponse.json.writers}}</p>
+                
+                <h5>Penciller</h5>
+                <p>{{pageResponse.json.penciller}}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalResponse2" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{pageResponseCharacters.title}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+     
+                <h5>Ultima actualización</h5>
+                <p>{{pageResponseCharacters.json.last_sync}}</p>
+
+                <div class="card-chara" *ngFor="let hero of pageResponseCharacters.json.items">
+                    <h5>{{hero.character}}</h5>
+                    <p>{{hero.comics}}</p>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>

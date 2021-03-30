@@ -1,0 +1,43 @@
+<app-header></app-header>
+<div class="main">
+  
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a [routerLink]="['/']">Inicio</a></li>
+      <li class="breadcrumb-item">Comic</li>
+      <li class="breadcrumb-item active" aria-current="page">{{comic.title}}</li>
+    </ol>
+  </nav>
+  
+  <div class="content">
+    <div class="img">
+      <img src="{{comic.thumbnail.path}}.{{comic.thumbnail.extension}}" alt="">
+    </div>
+    <div class="inf">
+      <h5>{{comic.title}}</h5>
+      <p>{{comic.description}}</p>
+    </div>
+  </div>
+  
+  <div class="creators">
+    <h4 class="text-center">Creadores</h4>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Role</th>
+            <th scope="col">Más información</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let creator of comic.creators.items">
+            <th scope="row">{{creator.name}}</th>
+            <td>{{creator.role}}</td>
+            <td><a (click)="infoCreator(creator.resourceURI)" class="btn"><i class="fas fa-info-circle"></i></a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

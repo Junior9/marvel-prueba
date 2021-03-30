@@ -1,0 +1,70 @@
+<app-header></app-header>
+<div class="main">
+  
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a [routerLink]="['/']">Inicio</a></li>
+            <li class="breadcrumb-item">Datos de prueba</li>
+        </ol>
+    </nav>
+
+    <div class="info">
+        <h5>Por que del registro de pruba</h5>
+        <p>La api de Marvel limita los resultado en 20 elementos por razon de seguridad</p>
+        <p>Con la limitacion de datos los .... </p>
+
+        <p><a href="http://localhost:8080/h2/" target="_blank">Base de datos (H2 Database)</a></p>
+      
+        <div class="alert">
+          <h5>Atención</h5>
+          <p>JDCB URL: jbdc:h2:mem:marvel</p>
+        </div>
+
+
+        <p><a (click)="setPrueba()" class="btn btn-primary">Regisrar datos</a></p>
+
+    </div>
+
+    <div class="img">
+      <img src="assets/img/codeError.PNG" alt="">
+    </div>
+    <div class="img">
+      
+        <img src="assets/img/h2.PNG" alt="">
+    </div>
+
+    <div class="pleca">
+        <p><a href="http://localhost:8080/h2/" target="_blank">Base de datos (H2 Database)</a></p>
+        <p><a (click)="setPrueba()" class="btn btn-primary">Regisrar datos</a></p>
+
+      
+    </div>
+
+</div>
+<app-footer></app-footer>
+
+
+<div class="modal" id="modalOk" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Datos registrados con suceso</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+        
+            <p>Heroes de teste registrados</p>
+            <p>Busque por los Heroes</p>
+            <p>Heroe 1</p>
+            <p>Heroe 2</p>
+            <p>Heroe 3</p>
+        </div>
+        <div class="modal-footer">
+          <button [routerLink]="['/']" type="button" class="btn btn-primary btn-block" data-dismiss="modal">Página de inicio</button>
+          <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,18 @@
+@import "./../../responsible.scss";
+
+.navbar{
+    .navbar-brand{
+        img{
+            width: 5%;
+            margin-right: 20px;
+            
+            @include table{
+                width: 10%;
+            }
+            
+            @include mobileGeneral{
+                width: 15%;
+            }
+        }
+    }
+}

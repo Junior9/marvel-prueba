@@ -1,0 +1,63 @@
+@import "./../../responsible.scss";
+
+
+.main{
+    
+    .breadcrumb{
+        margin: 15px 25px 15px 25px;
+    }
+    .content{
+        width: 100%;
+        display: flex;
+        
+        @include table{
+            flex-direction: column;
+        }
+        
+        @include mobileGeneral{
+            flex-direction: column;
+        }
+        
+        .img{
+            width: 50%;
+            padding: 2%;
+            text-align: center;
+            @include table{
+                width: 100%;
+            }
+            
+            @include mobileGeneral{
+                width: 100%;
+            }
+
+            img{
+                width: 70%;
+                @include table{
+                    width: 35%;
+                }
+
+                @include mobileGeneral{
+                    width: 50%;
+                }
+            }
+        }
+        .inf{
+            width: 50%;
+            padding: 2%;
+
+            @include table{
+                width: 100%;
+                text-align: center;
+            }
+            
+            @include mobileGeneral{
+                width: 100%;
+                text-align: center;
+            }
+        }
+    }
+    
+    .creators{
+        padding: 3%;
+    }
+}

@@ -1,0 +1,62 @@
+<app-header></app-header>
+<div class="main">
+    
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a [routerLink]="['/']">Inicio</a></li>
+            <li class="breadcrumb-item">Heroes</li>
+            <li class="breadcrumb-item active" aria-current="page">{{heroe.name}}</li>
+        </ol>
+    </nav>
+    <div class="content">
+        <div class="info">
+            <div class="img">
+                <img src="{{heroe.img}}" alt="">
+            </div>
+            <div class="detalles-inf">
+                <h3>{{heroe.name}}</h3>
+                <p>{{heroe.description}}</p>
+                <p><b>Ultima actualizacíon</b> </p>
+                <p>{{heroe.lastUpdate}}</p>
+            </div>
+        </div>
+
+
+        <h4 class="text-center">Comics relacionados al {{heroe.name}} </h4>
+
+        <div class="detalles" *ngIf="showDetalles">
+            
+            <div class="card-marvel"  *ngFor="let comic of heroe.comics">
+                <img class="card-img" src="{{comic.thumbnail.path}}.{{comic.thumbnail.extension}}" alt="Card image cap">
+                <div class="card-body-marvel">
+                    <h5 class="card-title-marvel">{{comic.title }}</h5>
+                    <p class="card-text-marvel">{{comic.description }}...</p>
+                    <a [routerLink]="['/comic/',comic.id]" class="btn">Más información</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+<app-footer></app-footer>
+
+<!-- Modal -->
+<div class="modal fade" id="modalError" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Heroe no encontrado</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                {{msnError}}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Cerrar</button>
+                <button data-dismiss="modal" [routerLink]="['/']"  type="button" class="btn btn-primary btn-block">Página de inicio</button>
+            </div>
+        </div>
+    </div>
+</div>
