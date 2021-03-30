@@ -17,7 +17,6 @@ echo "Aguarde..."
 mvn clean install
 
 echo "Inicializado servidor..."
-cd 'prueba'
 cd 'target'
 echo "Starting servidor..."
 echo "Aguarde..."
