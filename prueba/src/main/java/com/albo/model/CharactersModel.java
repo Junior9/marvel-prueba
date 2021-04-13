@@ -8,15 +8,11 @@ import javax.persistence.Table;
 
 import org.json.JSONObject;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Entity
 @Table(name="characters")
 @ToString
-@NoArgsConstructor
-@Data
 public class CharactersModel {
 	
 	@Id
@@ -32,6 +28,7 @@ public class CharactersModel {
 	@Column(name="marvel_Id")
 	private Integer marvel_Id;
 	
+	public CharactersModel(){}
 	
 	public CharactersModel(String name,String resource,Integer idMarvel){
 		this.name = name;

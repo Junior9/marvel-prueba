@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.albo.model.CharactersModel;
-import com.albo.repository.CharactersRepository;
+import com.albo.service.CharacterService;
 import com.albo.service.MarvelService;
 
 @RestController
@@ -24,9 +24,14 @@ public class MarvelController {
 	@Autowired
 	private MarvelService marvelService;
 	
+	
 	@Autowired
-	private CharactersRepository charRespository;
-
+	private CharacterService characterService;
+	
+	
+	public MarvelController(MarvelService marvelService) {
+		this.marvelService = marvelService;
+	}
 
 	@GetMapping("/marvel/colaborators/{name}")
 	@ResponseBody
@@ -45,7 +50,7 @@ public class MarvelController {
 	
 	@GetMapping("/marvel/characters")
 	public ResponseEntity<String> geListCharacters() {
-		List<CharactersModel> chartList = (List<CharactersModel>) this.charRespository.findAll();
+		List<CharactersModel> chartList = (List<CharactersModel>) this.characterService.getAll();
 		JSONArray responseArrayJson = new JSONArray();
 		
 		chartList.forEach(character->{

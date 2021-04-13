@@ -1,29 +1,43 @@
 package com.albo.controller;
 
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.RequestBuilder;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
 
-@ExtendWith(SpringExtension.class)
-@WebMvcTest(MarvelController.class)
+import java.util.Arrays;
+import java.util.Date;
+
+import org.json.JSONObject;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import com.albo.enuns.CreatorType;
+import com.albo.service.MarvelService;
 
 public class MarvelControllerTests {
 	
-	@Autowired
-	private MockMvc mvc;
-	
-	
-	//@Test
+	@Test
 	void getColaboratorsByCharacterNameTests() throws Exception {
-		RequestBuilder request = MockMvcRequestBuilders.get("/marvel/colaborators/cap");
-		MvcResult result =  mvc.perform(request).andReturn();
-		//assertEquals("", result.getResponse().getContentAsString());
+		
+		JSONObject jsonResponse = new JSONObject();
+		jsonResponse.put("Character", "PanteraNegra");
+		jsonResponse.put("last_sync", new Date());
+		jsonResponse.put(CreatorType.WRITERS.toString(), Arrays.asList("Writer1"));
+		jsonResponse.put(CreatorType.COLORISTS.toString(),Arrays.asList("COLORISTS"));
+		jsonResponse.put(CreatorType.EDITOR.toString(),Arrays.asList("EDITOR"));
+		jsonResponse.put(CreatorType.PENCIELLER.toString(),Arrays.asList("PENCIELLER"));
+		
+		MarvelService marvelService = Mockito.mock(MarvelService.class);
+		when(marvelService.getColaboratorsByCharacterName("PanteraNegra")).thenReturn(jsonResponse.toString());
+		
+		MarvelController marvelController = new MarvelController(marvelService);
+		ResponseEntity<String> resp = marvelController.getColaboratorsByCharacterName("PanteraNegra");
+		
+		assertEquals(HttpStatus.OK, resp.getStatusCode());
+		
 	}
+	
+	
 	
 
 }

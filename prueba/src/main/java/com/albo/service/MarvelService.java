@@ -31,6 +31,11 @@ public class MarvelService {
 	private final String CHARACTER = "Character";
 	private final String LAST_SYNC = "last_sync";
 	
+	MarvelService(CharactersRepository charactersRepository,SincronizaRepository syncRep){
+		this.charactersRepository = charactersRepository;
+		this.syncRep = syncRep; 
+	}
+	
 	public String getColaboratorsByCharacterName(String name) {
 		
 		JSONObject jsonResponse = new JSONObject();
@@ -39,35 +44,30 @@ public class MarvelService {
 		
 		listCreators.forEach(creator->{
 			List<String> line = Arrays.asList(creator.split(","));
-			
-
+		
 			switch ( CreatorType.get(line.get(2).toString())) {
 			case EDITOR  :
 				respDAO.addEditor(line.get(1).toString());
 				break;
-				
 			case WRITERS:
 				respDAO.addWriter(line.get(1).toString());
 				break;
-				
 			case COLORISTS:
 				respDAO.addColorist(line.get(1).toString());
 				break;
-				
 			case PENCIELLER:
 				respDAO.addPenciller(line.get(1).toString());
 				break;
-
 			default:
 				break;
 			}
 		});
 		jsonResponse.put(CHARACTER, name);
 		jsonResponse.put(LAST_SYNC, new Date());
-		jsonResponse.put(CreatorType.WRITERS.toString(), respDAO.getWriter());
-		jsonResponse.put(CreatorType.COLORISTS.toString(),respDAO.getColorist());
-		jsonResponse.put(CreatorType.EDITOR.toString(),respDAO.getEditor());
-		jsonResponse.put(CreatorType.PENCIELLER.toString(),respDAO.getPenciller());
+		jsonResponse.put(CreatorType.WRITERS.toString(), respDAO.getWriter().toString());
+		jsonResponse.put(CreatorType.COLORISTS.toString(),respDAO.getColorist().toString());
+		jsonResponse.put(CreatorType.EDITOR.toString(),respDAO.getEditor().toString());
+		jsonResponse.put(CreatorType.PENCIELLER.toString(),respDAO.getPenciller().toString());
 		
 		return jsonResponse.toString(); 
 	}
@@ -81,7 +81,6 @@ public class MarvelService {
 			List<String> line = Arrays.asList(charcter.split(","));
 			List<String> characters = this.charactersRepository.getCharactersBYComicsID(line.get(2) ) ;
 			List<String> nombres = new ArrayList<String>();
-			
 			characters.forEach(ch->{
 				List<String> lineChar = Arrays.asList(ch.split(","));
 				nombres.add(lineChar.get(0));
@@ -107,12 +106,16 @@ public class MarvelService {
 		
 		List<String> sybcLast = this.syncRep.getLastSync();
 		Gson gson = new Gson();
-	    Type gsonType = new TypeToken<HashMap>(){}.getType();
+	    Type gsonType = new TypeToken<>(){}.getType();
 	    String gsonString = gson.toJson(map,gsonType);
 	    JSONObject respJ = new JSONObject();
 	    respJ.put("result", gsonString);
-	    respJ.put("last_sync", sybcLast.get(0));
-	   
+	    if(sybcLast.size() > 0) {
+	    	respJ.put("last_sync", sybcLast.get(0));
+	    }else {
+	    	respJ.put("last_sync", new Date());
+	    }
+   
 		return respJ.toString();
 	}
 }

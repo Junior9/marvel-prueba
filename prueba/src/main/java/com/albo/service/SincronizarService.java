@@ -47,30 +47,34 @@ public class SincronizarService {
 	@Autowired
 	private FormatBuild buildService;
 	
-	public void sincronizaDataBase(JSONObject request) {		
-		JSONArray jsonComics = (JSONArray) request.get("comics");
-		JSONArray jsonCharacters = (JSONArray) request.get("characteres");
-		JSONArray jsonCreators = (JSONArray) request.get("creators");
+	public void sincronizaDataBase(JSONObject request) {	
 		
-		List<ComicsModel> listComics = this.buildService.buildComics(jsonComics);
-		List<CharactersModel> listCharacters = this.buildService.buildCharacters(jsonCharacters);
-		List<Creators> listCreators = this.buildService.buildCreators(jsonCreators);
-		List<Character_Comics> listCharacterComicConection = this.buildService.buildCharacterComicConection(jsonCharacters);
-		List<CreatorsComics> listCreatorsComicConection = this.buildService.buildCreatorsComicConection(jsonComics);
+		if(request.has("comics") &&  request.has("comics") && request.has("comics") ) {
+			JSONArray jsonComics = (JSONArray) request.get("comics");
+			JSONArray jsonCharacters = (JSONArray) request.get("characteres");
+			JSONArray jsonCreators = (JSONArray) request.get("creators");
+			
+			List<ComicsModel> listComics = this.buildService.buildComics(jsonComics);
+			List<CharactersModel> listCharacters = this.buildService.buildCharacters(jsonCharacters);
+			List<Creators> listCreators = this.buildService.buildCreators(jsonCreators);
+			List<Character_Comics> listCharacterComicConection = this.buildService.buildCharacterComicConection(jsonCharacters);
+			List<CreatorsComics> listCreatorsComicConection = this.buildService.buildCreatorsComicConection(jsonComics);
 	
-		
-		this.comicsRepository.saveAll(listComics);
-		this.charactersRepository.saveAll(listCharacters);
-		this.creatorsRepository.saveAll(listCreators);
-		this.charaComicRepository.saveAll(listCharacterComicConection);
-		this.creatorsComicRepository.saveAll(listCreatorsComicConection);
-		this.sincronizaRepository.save(new Sincroniza(new Date(), listCharacters.size(), listComics.size(), listCreators.size()));
+			this.comicsRepository.saveAll(listComics);
+			this.charactersRepository.saveAll(listCharacters);
+			this.creatorsRepository.saveAll(listCreators);
+			this.charaComicRepository.saveAll(listCharacterComicConection);
+			this.creatorsComicRepository.saveAll(listCreatorsComicConection);
+			this.sincronizaRepository.save(new Sincroniza(new Date(), listCharacters.size(), listComics.size(), listCreators.size()));
+		}else {
+			throw new ApiRequestsException("Datos de sincronización incorretos");
+		}
 	}
 	
 	public JSONArray getHistory() {	
-		Iterable<Sincroniza> his = this.sincronizaRepository.findAll();
+		Iterable<Sincroniza> history = this.sincronizaRepository.findAll();
 		JSONArray resp = new JSONArray();
-		his.forEach(item->{
+		history.forEach(item->{
 			resp.put(this.buildService.buildSincronizacion(item));
 		});
 		return resp;

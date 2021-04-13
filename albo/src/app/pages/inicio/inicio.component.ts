@@ -171,7 +171,7 @@ export class InicioComponent implements OnInit {
             $("#modal").modal("hide");
             $("#modalSincroniza").modal("hide");
             $("#modalSincronizaError").modal("show");
-            this.pageErrorMsn.requestErrorMsn = "Servido fuera de servicio"
+            this.pageErrorMsn.requestErrorMsn = error.error.msn;
           })
         })
       })
