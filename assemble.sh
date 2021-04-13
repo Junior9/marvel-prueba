@@ -1,8 +1,16 @@
 #!/bin/bash
 echo "Prueba Albo"
 cd 'albo'
+
+echo "........."
+echo "Paso 1 : Instalación de las dependencias Angular(Front-end)"
+echo "Paso 2 : Compilación del proyecto"
+echo "Paso 3 : Instalación de las dependencias Java (Back-End)"
+echo "Paso 3 : Inicia Servidor"
+echo "........."
+
 echo "Instalación de las dependencias front-end..."
-echo "Aguarde..."
+echo "Aguarde algunos segundos..."
 npm install
 
 echo "Compilando proyecto Agular..."

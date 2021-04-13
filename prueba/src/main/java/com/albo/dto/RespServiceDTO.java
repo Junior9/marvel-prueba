@@ -1,9 +1,9 @@
-package com.albo.dao;
+package com.albo.dto;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class RespService1DAO {
+public class RespServiceDTO {
 	
 	private String last_sync;
 	private List<String> writer;
@@ -11,7 +11,7 @@ public class RespService1DAO {
 	private List<String> penciller;
 	private List<String> editor;
 	
-	public RespService1DAO(){
+	public RespServiceDTO(){
 		this.writer = new ArrayList<>();
 		this.colorist = new ArrayList<>();
 		this.penciller = new ArrayList<>();

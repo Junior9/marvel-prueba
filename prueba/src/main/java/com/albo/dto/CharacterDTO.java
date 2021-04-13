@@ -1,14 +1,14 @@
-package com.albo.dao;
+package com.albo.dto;
 
 import java.util.List;
 
-public class CharacterDAO {
+public class CharacterDTO {
 
 	private String name;
 	private List<String> comics;
 	
 	
-	public CharacterDAO(String name,List<String> comics) {
+	public CharacterDTO(String name,List<String> comics) {
 		this.name = name;
 		this.comics = comics;
 	}

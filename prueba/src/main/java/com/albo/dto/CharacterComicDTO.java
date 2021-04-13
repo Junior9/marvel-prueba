@@ -1,16 +1,16 @@
-package com.albo.dao;
+package com.albo.dto;
 
 import java.util.List;
 
-public class CharacterComicDAO {
+public class CharacterComicDTO {
 	
 	private String comic;
 	private List<String> chactersList;
 	private Integer comicId;
 	
-	public CharacterComicDAO(){}
+	public CharacterComicDTO(){}
 	
-	public CharacterComicDAO(String comic,List<String> chactersList,Integer comicId){
+	public CharacterComicDTO(String comic,List<String> chactersList,Integer comicId){
 		this.comic = comic;
 		this.chactersList = chactersList;
 		this.comicId = comicId;

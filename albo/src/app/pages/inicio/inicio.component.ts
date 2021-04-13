@@ -75,12 +75,13 @@ export class InicioComponent implements OnInit {
       if(this.nombreCharacToFilterColabo != ''){
         $("#modal").modal("show");
         this.marvelService.getColaboaratorsByCharacterName(this.nombreCharacToFilterColabo).subscribe(resp=>{
+
           this.pageResponse.title = "Editores, escritores y coloristas que han estado involucrados con " +this.nombreCharacToFilterColabo;
           this.pageResponse.json.Character = resp['Character'];
-          this.pageResponse.json.colorists = resp['colorists'];
-          this.pageResponse.json.editor = resp['editor'];
-          this.pageResponse.json.penciller = resp['penciller'];
-          this.pageResponse.json.writers = resp['writers'];
+          this.pageResponse.json.colorists = resp['COLORISTS'];
+          this.pageResponse.json.editor = resp['EDITOR'];
+          this.pageResponse.json.penciller = resp['PENCIELLER'];
+          this.pageResponse.json.writers = resp['WRITERS'];
           this.pageResponse.json.last_sync = resp['last_sync'];
           
           $("#modal").modal("hide");
@@ -115,9 +116,7 @@ export class InicioComponent implements OnInit {
           this.pageResponseCharacters.title = "Characteres que interacturon con el "+ this.nombreCharacToFilter;
           this.pageResponseCharacters.json.last_sync = lastSyc;
           this.pageResponseCharacters.json.items = list;
-
-          console.log(this.pageResponseCharacters)
-
+          
           $("#modal").modal("hide");
           $("#modalResponse2").modal("show")
         },error=>{
@@ -168,6 +167,7 @@ export class InicioComponent implements OnInit {
             }
             
           },error=>{
+            console.error(error);
             $("#modal").modal("hide");
             $("#modalSincroniza").modal("hide");
             $("#modalSincronizaError").modal("show");

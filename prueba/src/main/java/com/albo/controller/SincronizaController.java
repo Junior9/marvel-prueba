@@ -2,6 +2,8 @@ package com.albo.controller;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,28 +21,36 @@ public class SincronizaController {
 	private SincronizarService sincronizaService;
 
 	@PostMapping(value="/sincroniza")
-	public String getColaboratorsByCharacterName(@RequestBody String datos) {
+	public ResponseEntity<String> getColaboratorsByCharacterName(@RequestBody String datos) {
 		JSONObject datoJson = new JSONObject(datos);
 		this.sincronizaService.sincronizaDataBase(datoJson);
-		return new JSONObject().put("stutus", true).toString();
+		JSONObject json = new JSONObject().put("status", true);
+		ResponseEntity<String> response = new ResponseEntity<String>(json.toString(), HttpStatus.OK);
+		return response;
 	} 
 	
 	@GetMapping("/history")
 	@ResponseBody
-	public String getHistory() {
-		return this.sincronizaService.getHistory().toString();
+	public ResponseEntity<String> getHistory() {
+		String jsonResponse = this.sincronizaService.getHistory().toString();
+		ResponseEntity<String> response = new ResponseEntity<String>(jsonResponse, HttpStatus.OK);
+		return response;
 	}
 	
 	@GetMapping("/agenda")
 	@ResponseBody
-	public String agendaSincronizacion() throws InterruptedException {
+	public ResponseEntity<String> agendaSincronizacion() throws InterruptedException {
 		this.sincronizaService.sincro();
-		return new JSONObject().put("status", true).toString();
+		JSONObject json = new JSONObject().put("status", true);
+		ResponseEntity<String> response = new ResponseEntity<String>(json.toString(), HttpStatus.OK);
+		return response;
 	}
 	
 	@GetMapping("/marvel/prueba")
-	public String setDatosPrueba() {
-		this.sincronizaService.setDatosPrueba();
-		return new JSONObject().put("result", "OK").toString();
+	public ResponseEntity<String> setDatosPrueba() {
+		this.sincronizaService.setDatosPrueba();	
+		JSONObject json = new JSONObject().put("status", true);
+		ResponseEntity<String> response = new ResponseEntity<String>(json.toString(), HttpStatus.OK);
+		return response;
 	}
 }

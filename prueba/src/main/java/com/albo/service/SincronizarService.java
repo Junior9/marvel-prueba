@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import com.albo.exception.ApiRequestsException;
 import com.albo.model.Character_Comics;
 import com.albo.model.CharactersModel;
 import com.albo.model.ComicsModel;
@@ -56,6 +57,7 @@ public class SincronizarService {
 		List<Creators> listCreators = this.buildService.buildCreators(jsonCreators);
 		List<Character_Comics> listCharacterComicConection = this.buildService.buildCharacterComicConection(jsonCharacters);
 		List<CreatorsComics> listCreatorsComicConection = this.buildService.buildCreatorsComicConection(jsonComics);
+	
 		
 		this.comicsRepository.saveAll(listComics);
 		this.charactersRepository.saveAll(listCharacters);
@@ -109,12 +111,12 @@ public class SincronizarService {
 		
 		
 		this.creatorsComicRepository.save(new CreatorsComics(963852,741852,"editor"));
-		this.creatorsComicRepository.save(new CreatorsComics(963852,741851,"letterer"));
+		this.creatorsComicRepository.save(new CreatorsComics(963852,741851,"penciller"));
 		this.creatorsComicRepository.save(new CreatorsComics(963853,741853,"editor"));		
-		this.creatorsComicRepository.save(new CreatorsComics(963853,741857,"writer"));	
+		this.creatorsComicRepository.save(new CreatorsComics(963853,741857,"writers"));	
 		
-		this.creatorsComicRepository.save(new CreatorsComics(963854,741857,"colorist"));		
-		this.creatorsComicRepository.save(new CreatorsComics(963855,741852,"colorist"));
+		this.creatorsComicRepository.save(new CreatorsComics(963854,741857,"colorists"));		
+		this.creatorsComicRepository.save(new CreatorsComics(963855,741852,"colorists"));
 	}
 
 	@Scheduled(cron="0 1 2 * * *")
