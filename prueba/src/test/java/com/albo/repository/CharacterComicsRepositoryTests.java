@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -17,8 +18,13 @@ class CharacterComicsRepositoryTests {
 	@Autowired
 	private CharacterComicsRepository charactersRespository;
 	
+	@AfterEach
+	void clean() {
+		this.charactersRespository.deleteAll();
+	}
+	
 	@Test
-	void selectCharacter() {
+	void selectCharacterTests() {
 		//given
 		Character_Comics character = new Character_Comics(1857,885);
 		this.charactersRespository.save(character);
@@ -30,7 +36,7 @@ class CharacterComicsRepositoryTests {
 	}
 	
 	@Test
-	void delteCharacter() {
+	void delteCharacterTests() {
 		 List<Character_Comics> resultList = new ArrayList<Character_Comics>();
 		//given
 		this.charactersRespository.save( new Character_Comics(1857,885));
